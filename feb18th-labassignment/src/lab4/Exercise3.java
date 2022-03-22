@@ -1,26 +1,70 @@
 package lab4;
-abstract class item{
-	private double Id;
+import java.util.Arrays;
+import java.util.Objects;
+class Cart{
+	Item [] items=new Item[10];
+	int cnt;
+	public void addItem(Item item)
+	{
+		if(cnt<10 && item.isCheckedIn())
+		{
+			if(item.getNoOfCopies()==0)
+			{
+				System.out.println("Stock not available.");
+				return;
+			}
+			this.items[cnt]=item;
+			item.setNoOfCopies(item.getNoOfCopies()-1);
+			cnt++;
+		}
+		else if(cnt>9)
+			System.out.println("Cart is full, please complete rhis order and make a new one.");
+		else
+			System.out.println("Please check in to add item.");
+	}
+	@Override
+	public String toString() {
+		return "Cart [items=" + Arrays.toString(items) + "]";
+	}
+}
+abstract class Item{
+	private int id;
 	private String title;
-	private int copies;
-	private static boolean Checkedin;
-	item(double id, String title, int copies){
-		this.Id=id;
+	private int noOfCopies;
+	private static boolean checkedIn;
+	private Cart inCart;
+	public static boolean isCheckedIn() {
+		return checkedIn;
+	}
+	public static void setCheckedIn(boolean checkedin) {
+		checkedIn = checkedin;
+	}
+	public Item(int id,String title, int noOfCopies)
+	{
+		this.id=id;
 		this.title=title;
-		this.copies=copies;
+		this.noOfCopies=noOfCopies;
 	}
-	public static void setCheckedin(boolean checkedin) {
-		checkedin=checkedin;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, noOfCopies, title);
 	}
-	public boolean isCheckedin() {
-		return Checkedin;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		return id == other.id && noOfCopies == other.noOfCopies && Objects.equals(title, other.title);
 	}
-	
-	public double getId() {
-		return Id;
+	public int getId() {
+		return id;
 	}
-	public void setId(double id) {
-		Id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;
@@ -28,82 +72,104 @@ abstract class item{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getCopies() {
-		return copies;
+	public int getNoOfCopies() {
+		return noOfCopies;
 	}
-	public void setCopies(int copies) {
-		this.copies = copies;
+	public void setNoOfCopies(int noOfCopies) {
+		this.noOfCopies = noOfCopies;
 	}
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", title=" + title + ", noOfCopies=" + noOfCopies + "]";
+	}
+	public Cart getInCart() {
+		return inCart;
+	}
+	public void setInCart(Cart inCart) {
+		this.inCart = inCart;
+	}
 	
 }
-abstract class WrittenItem extends item{
-	WrittenItem(double id, String title, int copies) {
-		super(id, title, copies);
-		// TODO Auto-generated constructor stub
-	}
-
+class WrittenItem extends Item{
 	private String author;
+	WrittenItem(int id,String title, int noOfCopies)
+	{
+		super(id,title,noOfCopies);
+	}
+	
 }
-//////////////////////////////////////////////////////
 class Book extends WrittenItem{
-
-	Book(double id, String title, int copies) {
-		super(id, title, copies);
-		// TODO Auto-generated constructor stub
+	Book(int id,String title, int noOfCopies)
+	{
+		super(id,title,noOfCopies);
 	}
-	
 }
-///////////////////////////////////////////////
 class JournalPaper extends WrittenItem{
-	private int year;
-
-	JournalPaper(double id, String title, int copies) {
-		super(id, title, copies);
-		// TODO Auto-generated constructor stub
+	private int publishedYear;
+	JournalPaper(int id,String title, int noOfCopies)
+	{
+		super(id,title,noOfCopies);
 	}
-	
 }
-//////////////////////////////////////////
-abstract class Mediaitem extends item{
-	private int runtime;
-
-	Mediaitem(double id, String title, int copies) {
-		super(id, title, copies);
-		// TODO Auto-generated constructor stub
+class MediaItem extends Item{
+	private int runtime ;
+	MediaItem(int id,String title, int noOfCopies)
+	{
+		super(id,title,noOfCopies);
 	}
-	
 }
-////////////////////////////////////////
-
-class Vedio extends Mediaitem{
+class Video extends MediaItem{
 	private String director;
 	private String genre;
-	private int pub_year;
-
-	Vedio(double id, String title, int copies) {
-		super(id, title, copies);
-		
+	private int yearOfRelease;
+	Video(int id,String title, int noOfCopies)
+	{
+		super(id,title,noOfCopies);
 	}
-	
+	Video(int id,String title, int noOfCopies,String director,String genre,int yearOfRelease)
+	{
+		super(id,title,noOfCopies);
+		this.director=director;
+		this.genre=genre;
+		this.yearOfRelease=yearOfRelease;
+	}
+	@Override
+	public String toString() {
+		return "Video [id=" + getId() + ", title=" + getTitle() + ", noOfCopies=" + getNoOfCopies()+", director=" + director + ", genre=" + genre + ", yearOfRelease=" + yearOfRelease + "]";
+	}
 }
-////////////////////////////////////////
-class CD extends Mediaitem{
+class CD extends MediaItem{
 	private String artist;
 	private String genre;
-
-	CD(double id, String title, int copies) {
-		
-		super(id, title, copies);
-		// TODO Auto-generated constructor stub
+	CD(int id,String title, int noOfCopies)
+	{
+		super(id,title,noOfCopies);
 	}
-	
+	CD(int id,String title, int noOfCopies,String artist,String genre)
+	{
+		super(id,title,noOfCopies);
+		this.artist=artist;
+		this.genre=genre;
+	}
+	@Override
+	public String toString() {
+		return "CD [id=" + getId() + ", title=" + getTitle() + ", noOfCopies=" + getNoOfCopies()+"artist=" + artist + ", genre=" + genre + "]";
+	}
 }
 
-
 public class Exercise3 {
-	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Item item1=new CD(101,"CD1",3,"Aiyo","Rap music");
+		Item item2=new Video(201,"Vid1",5,"Robin","Science",2014);
+		System.out.println(item1);
+		System.out.println(item2);
+		Cart cart=new Cart();
+		Item.setCheckedIn(true);
+		System.out.println(item2.isCheckedIn());
+		cart.addItem(item1);
+		System.out.println(cart);
+	}
 
 }
