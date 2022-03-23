@@ -6,17 +6,18 @@
 <hibernate-configuration>
 	<session-factory>
 
-		<property name="connection.url">jdbc:postgresql://localhost:5432/Book</property> <!-- BD Mane -->
+		<property name="connection.url">jdbc:postgresql://localhost:5432/AuthorBook</property> <!-- BD Mane -->
 		<property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
 		<property name="connection.username">postgres</property> <!-- DB User -->
 		<property name="connection.password">root</property> <!-- DB Password -->
 
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> <!-- DB Dialect -->
-		<property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
+		<property name="hbm2ddl.auto">create</property> <!-- create / create-drop / update -->
 		<property name="show_sql">true</property> <!-- Show SQL in console -->
-		<property name="format_sql">true</property> <!-- Show SQL formatted -->
+		<property name="format_sql">false</property> <!-- Show SQL formatted -->
 
-		<mapping class="maven.demo.JPA.AuthorTable" />
+		<mapping class="lab1.BookTable" />
+		<mapping class="lab1.AuthorTable" />
 
 	</session-factory>
 </hibernate-configuration>
