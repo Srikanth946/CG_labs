@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "author_table")
 public class AuthorTable {
+	//
 	@Id
 	@Column(name = "aid")
 	private int id;
