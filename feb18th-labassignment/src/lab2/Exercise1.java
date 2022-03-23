@@ -7,6 +7,7 @@ public class Exercise1 {
 		
 		return arr[1];
 	}
+	// Lab
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

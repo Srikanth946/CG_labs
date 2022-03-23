@@ -44,7 +44,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "\n Employee details----- \n [employeeId=" + employeeId + ", employeeName=" + employeeName + ", salary=" + salary + ", age="
+		return "[ Employee  [employeeId=" + employeeId + ", employeeName=" + employeeName + ", salary=" + salary + ", age="
 				+ age + "]";
 	}
 	
