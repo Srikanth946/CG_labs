@@ -11,7 +11,7 @@ import org.hibernate.cfg.Configuration;
 public class BookAuthorTable {
 public static void main(String[] args) {
 	Configuration config = new Configuration();
-	
+	//
 	SessionFactory sessionFactory = config.configure().buildSessionFactory();
 	Session session = sessionFactory.openSession();
 	Transaction transaction = session.beginTransaction(); 
