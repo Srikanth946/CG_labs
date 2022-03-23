@@ -1,4 +1,4 @@
-package cg.feb18.spring.lab3;
+package cg.feb18.spring.lab1_3;
 
 import org.springframework.stereotype.Component;
 @Component

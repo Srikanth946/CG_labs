@@ -1,4 +1,4 @@
-package cg.feb18.spring.lab;
+package cg.feb18.spring.lab1_1_2;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

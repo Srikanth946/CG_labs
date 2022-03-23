@@ -1,4 +1,4 @@
-package cg.feb18.spring.lab3;
+package cg.feb18.spring.lab1_4;
 
 import java.util.ArrayList;
 
@@ -13,16 +13,10 @@ public class Test {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring.xml");
 		ApplicationContext c= new AnnotationConfigApplicationContext(Test.class);
 
-		Employee emp1 =  context.getBean("employee",Employee.class);
-		Employee emp2 =  context.getBean("employee1",Employee.class);
-		SBU sbu = (SBU)context.getBean(SBU.class);
-		ArrayList<Employee> list = new ArrayList<Employee>();
-		list.add(emp1);
-		list.add(emp2);
-		sbu.setList(list);
+		Employee emp2 =  context.getBean("employee2",Employee.class);
 		
-
-		System.out.println(sbu.toString());	
+		ArrayList<Employee> list = new ArrayList<Employee>();
+		list.add(emp2);
 
 		((AbstractApplicationContext) context).close();
 	}
