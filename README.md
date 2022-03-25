@@ -14,4 +14,7 @@ Sql,
 PostgreSql,
 JPA,
 Hibernet,
-Spring.
+Spring,
+Spring Boot,
+MVN,
+PostMan.
